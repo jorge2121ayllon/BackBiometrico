@@ -78,6 +78,7 @@ namespace backend.Api.Controllers
         [HttpPut("actualizar")]
         public IActionResult Put( User userDto)
         {
+            userDto.Date = System.DateTime.Now;
             if (userDto.Clave == null || userDto.Clave == "")
             {
                 userDto.Clave = _userService.GetPassword(userDto.Id);
