@@ -28,7 +28,7 @@ namespace backend.Api.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("lista")]
         public IActionResult Get([FromQuery] PostQueryFilter filters)
         {
             var users = _userService.GetUsers(filters);
@@ -62,7 +62,7 @@ namespace backend.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost("agregar")]
         public async Task<IActionResult> Post(UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
@@ -75,12 +75,12 @@ namespace backend.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, User userDto)
+        [HttpPut("actualizar")]
+        public IActionResult Put( User userDto)
         {
             if (userDto.Clave == null || userDto.Clave == "")
             {
-                userDto.Clave = _userService.GetPassword(id);
+                userDto.Clave = _userService.GetPassword(userDto.Id);
             }
             else
             {
@@ -88,7 +88,7 @@ namespace backend.Api.Controllers
             }
 
             var user = _mapper.Map<User>(userDto);
-            user.Id = id;
+            user.Id = userDto.Id;
 
             var result = _userService.UpdateUser(user);
             var response = new ApiResponse<bool>(result);

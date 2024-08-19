@@ -11,7 +11,7 @@ namespace backend.Infraestructure.Validators
         public UserValidator()
         {
             RuleFor(p => p.Rol).NotNull();
-            RuleFor(p => p.Clave).NotNull().Length(5, 100);
+            //RuleFor(p => p.Clave).NotNull().Length(5, 100);
             RuleFor(p => p.Gmail).NotNull();
             RuleFor(p => p.NombreUsuario).NotNull();
         }
