@@ -33,11 +33,14 @@ namespace backend.Infraestructure.Repositories
 
         public async Task Add(T entity)
         {
+            entity.Erased = false;
+            entity.Date = DateTime.Now;
             await _entities.AddAsync(entity);
         }
 
         public void Update(T entity)
         {
+            entity.Date = DateTime.Now;
             _entities.Update(entity);
         }
 

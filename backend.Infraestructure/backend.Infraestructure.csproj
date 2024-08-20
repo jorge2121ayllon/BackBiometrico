@@ -21,4 +21,8 @@
     <ProjectReference Include="..\backend.Core\backend.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataBase\" />
+  </ItemGroup>
+
 </Project>

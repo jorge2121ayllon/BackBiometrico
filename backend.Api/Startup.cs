@@ -67,6 +67,8 @@ namespace backend.Api
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICategoriaService, CategoriaService>();
+
             services.AddSingleton<IPasswordService, PasswordService>();
 
 

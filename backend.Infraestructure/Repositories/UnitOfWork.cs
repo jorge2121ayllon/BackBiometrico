@@ -11,6 +11,9 @@ namespace backend.Infraestructure.Repositories
     {
         private readonly InversionContext _context;
         private readonly IUserRepository _userRepository;
+        private readonly ICategoriaRepository _categoriaRepository;
+        private readonly IClubRepository _clubRepository;
+        private readonly IJugadorRepository _jugadorRepository;
 
         public UnitOfWork(InversionContext context)
         {
@@ -19,8 +22,12 @@ namespace backend.Infraestructure.Repositories
         }
 
         public IUserRepository UserRepository => _userRepository ?? new UserRepository(_context);
+        public ICategoriaRepository CategoriaRepository => _categoriaRepository ?? new CategoriaRepository(_context);
 
-    
+        public IClubRepository ClubRepository => _clubRepository ?? new ClubRepository(_context);
+
+        public IJugadorRepository JugadorRepository => _jugadorRepository ?? new JugadorRepository(_context);
+
         public void Dispose()
         {
             if (_context != null)
