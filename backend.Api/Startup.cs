@@ -68,6 +68,7 @@ namespace backend.Api
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICategoriaService, CategoriaService>();
+            services.AddTransient<IClubService, ClubService>();
 
             services.AddSingleton<IPasswordService, PasswordService>();
 

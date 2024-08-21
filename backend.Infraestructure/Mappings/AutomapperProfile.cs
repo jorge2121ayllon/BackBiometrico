@@ -16,6 +16,7 @@ namespace backend.Infraestructure.Mappings
             CreateMap<User, UserResponseDto>().ReverseMap();
 
             CreateMap<Categoria, CategoriaDto>().ReverseMap();
+            CreateMap<Club, ClubDto>().ReverseMap();
 
         }
     }
