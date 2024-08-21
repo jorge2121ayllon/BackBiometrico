@@ -2,31 +2,27 @@
 using backend.Api.Response;
 using backend.Core.CustomEntities;
 using backend.Core.DTOs;
-using backend.Core.Entities;
 using backend.Core.Interfaces;
 using backend.Core.QueryFilters;
 using backend.Core.Services;
 using backend.Infraestructure.Entities;
 using backend.Infraestructure.Interfaces;
-using backend.Infraestructure.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace backend.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriaController : ControllerBase
+    public class ClubController : ControllerBase
     {
-        private readonly ICategoriaService _categoriaService;
+        private readonly IClubService _service;
         private readonly IMapper _mapper;
-
-        public CategoriaController(ICategoriaService categoriaService, IMapper mapper)
+        public ClubController(IClubService clubService, IMapper mapper)
         {
-            this._categoriaService = categoriaService;
+            this._service = clubService;
             this._mapper = mapper;
         }
 
@@ -34,8 +30,8 @@ namespace backend.Api.Controllers
         [HttpGet("gets")]
         public IActionResult Gets([FromQuery] PostQueryFilter filters)
         {
-            var obj = _categoriaService.Gets(filters);
-            var objDto = _mapper.Map<IEnumerable<CategoriaDto>>(obj);
+            var obj = _service.Gets(filters);
+            var objDto = _mapper.Map<IEnumerable<ClubDto>>(obj);
 
             var metadata = new MetaData
             {
@@ -47,7 +43,7 @@ namespace backend.Api.Controllers
                 HasPreviousPage = obj.HasPreviousPage,
             };
 
-            var response = new ApiResponse<IEnumerable<CategoriaDto>>(objDto)
+            var response = new ApiResponse<IEnumerable<ClubDto>>(objDto)
             {
                 Meta = metadata
             };
@@ -58,33 +54,33 @@ namespace backend.Api.Controllers
         [HttpGet("get")]
         public async Task<IActionResult> Get(int id)
         {
-            var obj = await _categoriaService.Get(id);
-            var objDto = _mapper.Map<CategoriaDto>(obj);
-            var response = new ApiResponse<CategoriaDto>(objDto);
+            var obj = await _service.Get(id);
+            var objDto = _mapper.Map<ClubDto>(obj);
+            var response = new ApiResponse<ClubDto>(objDto);
 
             return Ok(response);
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> Post(CategoriaDto objDto)
+        public async Task<IActionResult> Post(ClubDto objDto)
         {
-            var obj = _mapper.Map<Categoria>(objDto);
+            var obj = _mapper.Map<Club>(objDto);
 
-            await _categoriaService.Add(obj);
+            await _service.Add(obj);
 
-            objDto = _mapper.Map<CategoriaDto>(obj);
-            var response = new ApiResponse<CategoriaDto>(objDto);
+            objDto = _mapper.Map<ClubDto>(obj);
+            var response = new ApiResponse<ClubDto>(objDto);
             return Ok(response);
         }
 
         [HttpPut("update")]
-        public IActionResult Put(CategoriaDto objDto)
+        public IActionResult Put(ClubDto objDto)
         {
-            
-            var obj = _mapper.Map<Categoria>(objDto);
+
+            var obj = _mapper.Map<Club>(objDto);
             obj.Id = objDto.Id;
 
-            var result = _categoriaService.Update(obj);
+            var result = _service.Update(obj);
             var response = new ApiResponse<bool>(result);
             return Ok(response);
         }
@@ -92,7 +88,7 @@ namespace backend.Api.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _categoriaService.Delete(id);
+            var result = await _service.Delete(id);
             var response = new ApiResponse<bool>(result);
 
             return Ok(response);
