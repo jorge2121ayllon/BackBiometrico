@@ -1,6 +1,7 @@
 ﻿using backend.Core.CustomEntities;
 using backend.Core.QueryFilters;
 using backend.Infraestructure.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,5 +16,6 @@ namespace backend.Core.Interfaces
         bool Update(Jugador jugador);
         Task<Jugador> Get(int id);
         Task<bool> Delete(int id);
+        Task<string> GuardarImagen(IFormFile file);
     }
 }

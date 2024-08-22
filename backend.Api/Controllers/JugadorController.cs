@@ -5,6 +5,7 @@ using backend.Core.DTOs;
 using backend.Core.Interfaces;
 using backend.Core.QueryFilters;
 using backend.Infraestructure.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -90,6 +91,15 @@ namespace backend.Api.Controllers
             var result = await _service.Delete(id);
             var response = new ApiResponse<bool>(result);
 
+            return Ok(response);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> GuardarImagen(IFormFile file)
+        {
+            var result = _service.GuardarImagen(file);
+            var response = new ApiResponse<string>(await result);
             return Ok(response);
         }
 

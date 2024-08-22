@@ -2,9 +2,11 @@
 using backend.Core.Interfaces;
 using backend.Core.QueryFilters;
 using backend.Infraestructure.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +76,38 @@ namespace backend.Core.Services
             _unitOfWork.JugadorRepository.Update(jugador);
             _unitOfWork.SaveChanges();
             return true;
+        }
+
+
+
+        public async Task<string> GuardarImagen(IFormFile file)
+        {
+
+            var path = string.Empty;
+            var path2 = string.Empty;
+
+            if (file != null && file.Length > 0)
+            {
+                var guid = Guid.NewGuid().ToString();
+                var file2 = $"{guid}.jpg";
+
+
+                path = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "MyStaticFiles/images",
+                    file2);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                path2 = $"StaticFiles/images/{file2}";
+
+                return path2;
+            }
+            return path2;
+
         }
     }
 }
