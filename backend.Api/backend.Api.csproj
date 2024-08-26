@@ -21,5 +21,9 @@
     <ProjectReference Include="..\backend.Infraestructure\backend.Infraestructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MyStaticFiles\images\" />
+  </ItemGroup>
+
 
 </Project>
