@@ -50,20 +50,16 @@ namespace backend.Core.Services
 
 
 
-           
+            var obj = _unitOfWork.JugadorRepository.GetAll().ToList();
+
             if (filters.filter != null)
             {
-               var  obj = _unitOfWork.JugadorRepository.GetAll().
+                obj = obj.
                        Where(   x => ( x.Nombre.ToLower().Trim() +" "+ x.ApellidoPaterno.ToLower().Trim() +" "+ x.ApellidoMaterno.ToLower().Trim() ).Contains(filters.filter.ToLower().Trim())
                        || x.Ci.ToLower().Trim() == filters.filter.ToLower().Trim()
                        ).ToList();
             }
-            else
-            {
-                var obj = _unitOfWork.JugadorRepository.GetAll().ToList();
-
-                
-            }
+           
 
             var pageobj = PagedList<Jugador>.Create(obj, filters.PageNumber, filters.PageSize);
 
