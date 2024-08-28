@@ -50,13 +50,13 @@ namespace backend.Core.Services
 
 
 
-            var obj = _unitOfWork.JugadorRepository.GetAll().ToList();
+            var obj = _unitOfWork.JugadorRepository.GetAllNavigation().ToList();
 
             if (filters.filter != null)
             {
                 obj = obj.
                        Where(   x => ( x.Nombre.ToLower().Trim() +" "+ x.ApellidoPaterno.ToLower().Trim() +" "+ x.ApellidoMaterno.ToLower().Trim() ).Contains(filters.filter.ToLower().Trim())
-                       || x.Ci.ToLower().Trim() == filters.filter.ToLower().Trim()
+                       || x.Ci.ToLower().Trim() == filters.filter.ToLower().Trim() || x.CategoriaNavigation.Descripcion.ToLower().Contains(filters.filter.ToLower()) || x.ClubNavigation.Descripcion.ToLower().Contains(filters.filter.ToLower())
                        ).ToList();
             }
            

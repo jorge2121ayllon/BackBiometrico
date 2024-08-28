@@ -7,5 +7,6 @@ namespace backend.Core.Interfaces
 {
     public interface IJugadorRepository:IRepository<Jugador>
     {
+        IEnumerable<Jugador> GetAllNavigation();
     }
 }
