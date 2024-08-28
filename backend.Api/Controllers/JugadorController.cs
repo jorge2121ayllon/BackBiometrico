@@ -29,7 +29,7 @@ namespace backend.Api.Controllers
         public IActionResult Gets([FromQuery] PostQueryFilter filters)
         {
             var obj = _service.Gets(filters);
-            var objDto = _mapper.Map<IEnumerable<JugadorDto>>(obj);
+            var objDto = _mapper.Map<IEnumerable<JugadorListDto>>(obj);
 
             var metadata = new MetaData
             {
@@ -41,7 +41,7 @@ namespace backend.Api.Controllers
                 HasPreviousPage = obj.HasPreviousPage,
             };
 
-            var response = new ApiResponse<IEnumerable<JugadorDto>>(objDto)
+            var response = new ApiResponse<IEnumerable<JugadorListDto>>(objDto)
             {
                 Meta = metadata
             };
