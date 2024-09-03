@@ -102,6 +102,13 @@ namespace backend.Api.Controllers
             var response = new ApiResponse<string>(await result);
             return Ok(response);
         }
+        [HttpPost("huella")]
+        public async Task<IActionResult> GuardarHuella(IFormFile file)
+        {
+            var result = _service.GuardarHuella(file);
+            var response = new ApiResponse<string>(await result);
+            return Ok(response);
+        }
 
     }
 }

@@ -105,5 +105,34 @@ namespace backend.Core.Services
             return path2;
 
         }
+        public async Task<string> GuardarHuella(IFormFile file)
+        {
+
+            var path = string.Empty;
+            var path2 = string.Empty;
+
+            if (file != null && file.Length > 0)
+            {
+                var guid = Guid.NewGuid().ToString();
+                var file2 = $"{guid}.jpg";
+
+
+                path = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "MyStaticFiles/huellas",
+                    file2);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                path2 = $"StaticFiles/huellas/{file2}";
+
+                return path2;
+            }
+            return path2;
+
+        }
     }
 }
