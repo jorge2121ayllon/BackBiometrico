@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="MyStaticFiles\images\" />
+    <Folder Include="MyStaticFiles\huellas\" />
   </ItemGroup>
 
 

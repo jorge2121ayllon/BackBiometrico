@@ -17,5 +17,6 @@ namespace backend.Core.Interfaces
         Task<Jugador> Get(int id);
         Task<bool> Delete(int id);
         Task<string> GuardarImagen(IFormFile file);
+        Task<string> GuardarHuella(IFormFile file);
     }
 }
