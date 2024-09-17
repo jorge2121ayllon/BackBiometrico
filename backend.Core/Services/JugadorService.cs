@@ -40,7 +40,7 @@ namespace backend.Core.Services
 
         public async Task<Jugador> Get(int id)
         {
-            return await _unitOfWork.JugadorRepository.GetById(id);
+            return await _unitOfWork.JugadorRepository.GetByIdAllNavigation(id);
         }
 
         public PagedList<Jugador> Gets(PostQueryFilter filters)

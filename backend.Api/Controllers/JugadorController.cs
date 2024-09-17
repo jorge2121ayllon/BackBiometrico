@@ -54,8 +54,8 @@ namespace backend.Api.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var obj = await _service.Get(id);
-            var objDto = _mapper.Map<JugadorDto>(obj);
-            var response = new ApiResponse<JugadorDto>(objDto);
+            var objDto = _mapper.Map<JugadorListDto>(obj);
+            var response = new ApiResponse<JugadorListDto>(objDto);
 
             return Ok(response);
         }
