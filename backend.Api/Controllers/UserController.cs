@@ -96,7 +96,7 @@ namespace backend.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete]
+        [HttpDelete("eliminar")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _userService.DeleteUser(id);
