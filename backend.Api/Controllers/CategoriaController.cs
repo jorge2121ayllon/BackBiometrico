@@ -3,12 +3,14 @@ using backend.Api.Response;
 using backend.Core.CustomEntities;
 using backend.Core.DTOs;
 using backend.Core.Entities;
+using backend.Core.Enumerations;
 using backend.Core.Interfaces;
 using backend.Core.QueryFilters;
 using backend.Core.Services;
 using backend.Infraestructure.Entities;
 using backend.Infraestructure.Interfaces;
 using backend.Infraestructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ using System.Threading.Tasks;
 
 namespace backend.Api.Controllers
 {
+    [Authorize(Roles = nameof(RoleType.Administrador))]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriaController : ControllerBase
@@ -31,6 +34,7 @@ namespace backend.Api.Controllers
         }
 
 
+      
         [HttpGet("gets")]
         public IActionResult Gets([FromQuery] PostQueryFilter filters)
         {

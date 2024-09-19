@@ -2,9 +2,11 @@
 using backend.Api.Response;
 using backend.Core.CustomEntities;
 using backend.Core.DTOs;
+using backend.Core.Enumerations;
 using backend.Core.Interfaces;
 using backend.Core.QueryFilters;
 using backend.Infraestructure.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -13,10 +15,12 @@ using System.Threading.Tasks;
 
 namespace backend.Api.Controllers
 {
+    [Authorize(Roles = nameof(RoleType.Administrador))]
     [Route("api/[controller]")]
     [ApiController]
     public class JugadorController : ControllerBase
     {
+
         private readonly IJugadorService _service;
         private readonly IMapper _mapper;
         public JugadorController(IJugadorService service, IMapper mapper)
