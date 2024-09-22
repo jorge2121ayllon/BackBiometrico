@@ -10,5 +10,7 @@ namespace backend.Core.Interfaces
     {
         IEnumerable<Jugador> GetAllNavigation();
         Task<Jugador> GetByIdAllNavigation(int id);
+        
+        IEnumerable<Jugador> GetAllNavigationFromClub(int Club, int Categoria);
     }
 }
