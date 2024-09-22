@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace backend.Api.Controllers
 {
-    [Authorize(Roles = nameof(RoleType.Administrador))]
+    //[Authorize(Roles = nameof(RoleType.Administrador))]
     [Route("api/[controller]")]
     [ApiController]
     public class ClubController : ControllerBase
