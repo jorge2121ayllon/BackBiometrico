@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace backend.Api.Controllers
 {
-    [Authorize(Roles = nameof(RoleType.Administrador))]
+    //[Authorize(Roles = nameof(RoleType.Administrador))]
     [Route("api/[controller]")]
     [ApiController]
     public class JugadorController : ControllerBase
@@ -33,6 +33,30 @@ namespace backend.Api.Controllers
         public IActionResult Gets([FromQuery] PostQueryFilter filters)
         {
             var obj = _service.Gets(filters);
+            var objDto = _mapper.Map<IEnumerable<JugadorListDto>>(obj);
+
+            var metadata = new MetaData
+            {
+                TotalCount = obj.TotalCount,
+                PageSize = obj.PageSize,
+                CurrentPage = obj.CurrentPage,
+                TotalPages = obj.TotalPages,
+                HasNextPage = obj.HasNextPage,
+                HasPreviousPage = obj.HasPreviousPage,
+            };
+
+            var response = new ApiResponse<IEnumerable<JugadorListDto>>(objDto)
+            {
+                Meta = metadata
+            };
+            return Ok(response);
+
+        }
+        
+        [HttpGet("getsFromClub")]
+        public IActionResult GetsFromClub([FromQuery] PostQueryFilter filters, int Club, int Categoria)
+        {
+            var obj = _service.GetsFromClub(filters, Club, Categoria);
             var objDto = _mapper.Map<IEnumerable<JugadorListDto>>(obj);
 
             var metadata = new MetaData

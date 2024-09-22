@@ -13,6 +13,7 @@ namespace backend.Core.Interfaces
     {
         Task Add(Jugador jugador);
         PagedList<Jugador> Gets(PostQueryFilter filters);
+        PagedList<Jugador> GetsFromClub(PostQueryFilter filters, int Club, int Categoria);
         bool Update(Jugador jugador);
         Task<Jugador> Get(int id);
         Task<bool> Delete(int id);

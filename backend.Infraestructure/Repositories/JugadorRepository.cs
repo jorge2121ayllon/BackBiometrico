@@ -21,6 +21,11 @@ namespace backend.Infraestructure.Repositories
             return _entities.Include(obj => obj.CategoriaNavigation).Include(obj=>obj.ClubNavigation).AsEnumerable().Where(x => x.Erased == false);
         }
 
+        public IEnumerable<Jugador> GetAllNavigationFromClub(int Club, int Categoria)
+        {
+            return _entities.Include(obj => obj.CategoriaNavigation).Include(obj => obj.ClubNavigation).AsEnumerable().Where(x => x.Erased == false && x.Club == Club && x.Categoria == Categoria );
+        }
+
         public Task<Jugador> GetByIdAllNavigation(int id)
         {
             return  _entities.Include(obj => obj.CategoriaNavigation).Include(obj => obj.ClubNavigation).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
