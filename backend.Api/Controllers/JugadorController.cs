@@ -52,7 +52,31 @@ namespace backend.Api.Controllers
             return Ok(response);
 
         }
-        
+
+        [HttpGet("getsDeleted")]
+        public IActionResult GetsAllDeleted([FromQuery] PostQueryFilter filters)
+        {
+            var obj = _service.GetsAllDeleted(filters);
+            var objDto = _mapper.Map<IEnumerable<JugadorListDto>>(obj);
+
+            var metadata = new MetaData
+            {
+                TotalCount = obj.TotalCount,
+                PageSize = obj.PageSize,
+                CurrentPage = obj.CurrentPage,
+                TotalPages = obj.TotalPages,
+                HasNextPage = obj.HasNextPage,
+                HasPreviousPage = obj.HasPreviousPage,
+            };
+
+            var response = new ApiResponse<IEnumerable<JugadorListDto>>(objDto)
+            {
+                Meta = metadata
+            };
+            return Ok(response);
+
+        }
+
         [HttpGet("getsFromClub")]
         public IActionResult GetsFromClub([FromQuery] PostQueryFilter filters, int Club, int Categoria)
         {
@@ -107,6 +131,18 @@ namespace backend.Api.Controllers
             var obj = _mapper.Map<Jugador>(objDto);
             obj.Id = objDto.Id;
 
+            var result = _service.Update(obj);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
+
+        [HttpPut("restore")]
+        public IActionResult PutRestore(JugadorDto objDto)
+        {
+
+            var obj = _mapper.Map<Jugador>(objDto);
+            obj.Id = objDto.Id;
+            obj.Erased = false;
             var result = _service.Update(obj);
             var response = new ApiResponse<bool>(result);
             return Ok(response);

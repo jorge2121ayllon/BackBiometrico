@@ -22,6 +22,7 @@ namespace backend.Infraestructure.Data
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Club> Club { get; set; }
         public virtual DbSet<Jugador> Jugador { get; set; }
+        public virtual DbSet<Empleado> Empleado { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
