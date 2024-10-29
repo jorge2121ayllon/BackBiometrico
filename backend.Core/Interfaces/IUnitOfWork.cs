@@ -12,6 +12,7 @@ namespace backend.Core.Interfaces
         ICategoriaRepository CategoriaRepository { get; }
         IClubRepository ClubRepository { get; }
         IJugadorRepository JugadorRepository { get; }
+        //IEmpleadoRepository EmpleadoRepository { get; }
 
 
         void SaveChanges();

@@ -67,6 +67,8 @@ namespace backend.Core.Services
             return pageobj;
         }
 
+
+
         public bool Update(Jugador jugador)
         {
             _unitOfWork.JugadorRepository.Update(jugador);
@@ -143,6 +145,30 @@ namespace backend.Core.Services
 
 
             var obj = _unitOfWork.JugadorRepository.GetAllNavigationFromClub(Club, Categoria).ToList();
+
+            if (filters.filter != null)
+            {
+                obj = obj.
+                       Where(x => (x.Nombre.ToLower().Trim() + " " + x.ApellidoPaterno.ToLower().Trim() + " " + x.ApellidoMaterno.ToLower().Trim()).Contains(filters.filter.ToLower().Trim())
+                       || x.Ci.ToLower().Trim() == filters.filter.ToLower().Trim() || x.CategoriaNavigation.Descripcion.ToLower().Contains(filters.filter.ToLower()) || x.ClubNavigation.Descripcion.ToLower().Contains(filters.filter.ToLower())
+                       ).ToList();
+            }
+
+
+            var pageobj = PagedList<Jugador>.Create(obj, filters.PageNumber, filters.PageSize);
+
+
+            return pageobj;
+        }
+
+        public PagedList<Jugador> GetsAllDeleted(PostQueryFilter filters)
+        {
+            filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
+            filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
+
+
+
+            var obj = _unitOfWork.JugadorRepository.GetAllNavigationDeleted().ToList();
 
             if (filters.filter != null)
             {

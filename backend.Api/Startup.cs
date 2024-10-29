@@ -72,7 +72,7 @@ namespace backend.Api
             services.AddTransient<ICategoriaService, CategoriaService>();
             services.AddTransient<IClubService, ClubService>();
             services.AddTransient<IJugadorService, JugadorService>();
-
+            //services.AddTransient<IEmpleadoService, EmpleadoService>();
             services.AddSingleton<IPasswordService, PasswordService>();
 
 

@@ -21,6 +21,8 @@ namespace backend.Infraestructure.Mappings
             CreateMap<Jugador, JugadorDto>().ReverseMap();
             CreateMap<Jugador, JugadorListDto>().ReverseMap();
 
+            CreateMap<Empleado, EmpleadoDto>().ReverseMap();
+
         }
     }
 }

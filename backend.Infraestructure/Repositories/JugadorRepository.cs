@@ -18,7 +18,7 @@ namespace backend.Infraestructure.Repositories
 
         public IEnumerable<Jugador> GetAllNavigation()
         {
-            return _entities.Include(obj => obj.CategoriaNavigation).Include(obj=>obj.ClubNavigation).AsEnumerable().Where(x => x.Erased == false);
+            return _entities.Include(obj => obj.CategoriaNavigation).Include(obj=>obj.ClubNavigation).AsEnumerable().Where(x => x.Erased == false).OrderByDescending(obj=>obj.Id);
         }
 
         public IEnumerable<Jugador> GetAllNavigationFromClub(int Club, int Categoria)
@@ -29,6 +29,11 @@ namespace backend.Infraestructure.Repositories
         public Task<Jugador> GetByIdAllNavigation(int id)
         {
             return  _entities.Include(obj => obj.CategoriaNavigation).Include(obj => obj.ClubNavigation).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public IEnumerable<Jugador> GetAllNavigationDeleted()
+        {
+            return _entities.Include(obj => obj.CategoriaNavigation).Include(obj => obj.ClubNavigation).AsEnumerable().Where(x => x.Erased == true);
         }
     }
 }
